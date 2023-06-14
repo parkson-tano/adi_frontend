@@ -11,7 +11,9 @@ import ProductsAds from "./ProductsAds";
 import LayoutHomeThree from "../Partials/LayoutHomeThree";
 import SectionStyleOneHmThree from "../Helpers/SectionStyleOneHmThree";
 import Ads from "./Ads";
-
+import { IconBrandWhatsapp } from "@tabler/icons-react";
+import { Divider, UnstyledButton } from "@mantine/core";
+import { Modal, Button, Group, Title, Text } from "@mantine/core";
 export default function HomeThree() {
   const { products } = datas;
   const brands = [];
@@ -90,6 +92,30 @@ export default function HomeThree() {
           className="mb-[60px]"
           lastDate="2023-10-04 4:00:00"
         />
+        <div
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            backgroundColor: "#25D366",
+            color: "#fff",
+            width: "4rem",
+            height: "4rem",
+            borderRadius: "50%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            cursor: "pointer",
+          }}
+        >
+          <UnstyledButton
+            component="a"
+            href="https://wa.link/5o6dl1"
+            target="_blank"
+          >
+            <IconBrandWhatsapp size={50} color="white" />
+          </UnstyledButton>
+        </div>
         {/* <SectionStyleFour
           products={products}
           sectionTitle="Popular Sales"

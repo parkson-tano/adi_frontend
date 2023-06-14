@@ -122,7 +122,9 @@ export default function Footer({type}) {
                                             <a href="/about">
                                               <span
                                                   className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack cursor-pointer capitalize">
-                                                Support
+                                                      <a href="https://wa.link/5o6dl1">
+                                                        Support
+                                                      </a>
                                               </span>
                                             </a>
                                         </li>

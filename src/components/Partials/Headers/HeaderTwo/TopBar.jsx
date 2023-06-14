@@ -31,7 +31,9 @@ export default function TopBar({ className }) {
                 <li>
                   <Link to="/faq">
                     <span className="text-xs leading-6 text-qblack font-500">
-                      Support
+                      <a href="https://wa.link/5o6dl1">
+                        
+                      </a>
                     </span>
                   </Link>
                 </li>
