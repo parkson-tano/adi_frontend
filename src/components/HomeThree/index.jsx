@@ -70,8 +70,8 @@ export default function HomeThree() {
         </ViewMoreTitle>
         <ProductsAds
           ads={[
-            `${process.env.PUBLIC_URL}/assets/images/ads-1.png`,
-            `${process.env.PUBLIC_URL}/assets/images/ads-2.png`,
+            `${process.env.PUBLIC_URL}/assets/images/pic3.png`,
+            `${process.env.PUBLIC_URL}/assets/images/pic1.jpg`,
           ]}
           sectionHeight="sm:h-[295px] h-full"
           className="products-ads-section mb-[60px]"
