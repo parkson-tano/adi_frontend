@@ -550,9 +550,9 @@ export default function About() {
                 </div>
                 <div>
                   <p className="text-black text-[15px] font-700 tracking-wide mb-1 uppercase">
-                    Free Shipping
+                    Fast Shipping
                   </p>
-                  <p className="text-sm text-qblack">When ordering over $100</p>
+                  <p className="text-sm text-qblack">To Cameroon at cheap rate</p>
                 </div>
               </div>
             </div>

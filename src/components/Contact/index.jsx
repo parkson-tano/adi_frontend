@@ -58,10 +58,10 @@ export default function Contact() {
                     Phone
                   </p>
                   <p className="text-[15px] text-black leading-[30px] text-center">
-                    +(323) 9847 3847 383
+                    <a href="https://wa.link/5o6dl1">+237 6 75 37 56 44</a>
                   </p>
                   <p className="text-[15px] text-black leading-[30px] text-center">
-                    +(434) 5466 5467 443
+                    <a href="tel:+237675375644">+237 6 75 37 56 44</a>
                   </p>
                 </div>
                 <div className="xl:w-1/2 w-full h-[196px] flex flex-col item justify-center bg-[#D3EFFF] p-5">
