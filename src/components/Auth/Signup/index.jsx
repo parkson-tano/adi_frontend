@@ -5,8 +5,10 @@ import Thumbnail from "./Thumbnail";
 import axios from "axios";
 import {API_URL} from "../../../config"
 import { Password } from "tabler-icons-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
+  const navigate = useNavigate()
   const [checked, setValue] = useState(false);
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -103,8 +105,8 @@ const submitForm = () => {
                       name="email"
                       type="email"
                       inputClasses="h-[50px]"
-                      value = {email}
-                      inputHandler={(e)=> setEmail(e.target.value)}
+                      value={email}
+                      inputHandler={(e) => setEmail(e.target.value)}
                     />
 
                     <InputCom
@@ -184,9 +186,12 @@ const submitForm = () => {
                   <div className="signup-area flex justify-center">
                     <p className="text-base text-qgraytwo font-normal">
                       Alrady have an Account?
-                      <a href="/login" className="ml-2 text-qblack">
+                      <button
+                        className="ml-2 text-qblack"
+                        onClick={() => navigate("/login")}
+                      >
                         Log In
-                      </a>
+                      </button>
                     </p>
                   </div>
                 </div>

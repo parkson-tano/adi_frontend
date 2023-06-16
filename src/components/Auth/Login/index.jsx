@@ -2,13 +2,37 @@ import { useState } from "react";
 import InputCom from "../../Helpers/InputCom";
 import Layout from "../../Partials/Layout";
 import Thumbnail from "./Thumbnail";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/auth-context";
 
 export default function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [checked, setValue] = useState(false);
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [submit, setSubmit] = useState(false);
+  const [error, setError] = useState("");
   const rememberMe = () => {
     setValue(!checked);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const userData = {
+        email: email,
+        password: password,
+      };
+      const decoded = await login(userData);
+      navigate("/");
+      setSubmit(false);
+      setError(null);
+    } catch (err) {
+      console.log("aad", err);
+      setError(err.message); // set the error message in the state
+      setSubmit(false);
+    }
   };
   return (
     <Layout childrenClasses="pt-0 pb-0">
@@ -95,16 +119,17 @@ export default function Login() {
                       Forgot Password
                     </a>
                   </div>
-                  {/* <div className="signin-area mb-3.5">
+                  <div className="signin-area mb-3.5">
                     <div className="flex justify-center">
                       <button
                         type="button"
                         className="black-btn mb-6 text-sm text-white w-full h-[50px] font-semibold flex justify-center bg-purple items-center"
+                        onClick={handleSubmit}
                       >
                         <span>Log In</span>
                       </button>
                     </div>
-                    <a
+                    {/* <a
                       href="#"
                       className="w-full border border-qgray-border h-[50px] flex space-x-3  justify-center bg-[#FAFAFA] items-center"
                     >
@@ -156,14 +181,17 @@ export default function Login() {
                       <span className="text-[18px] text-qgraytwo font-normal">
                         Sign In with Google
                       </span>
-                    </a>
-                  </div> */}
+                    </a> */}
+                  </div>
                   <div className="signup-area flex justify-center">
                     <p className="text-base text-qgraytwo font-normal">
                       Dont’t have an aceount ?
-                      <a href="/signup" className="ml-2 text-qblack">
+                      <button
+                        className="ml-2 text-qblack"
+                        onClick={() => navigate("/signup")}
+                      >
                         Sign up free
-                      </a>
+                      </button>
                     </p>
                   </div>
                 </div>
