@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Arrow from "../../../Helpers/icons/Arrow";
+import { useAuth } from "../../../../context/auth-context";
 
 export default function Navbar({ className, type }) {
   const [categoryToggle, setToggle] = useState(false);
   const [elementsSize, setSize] = useState("0px");
+  const {user} = useAuth()
   // const getItems = document.querySelectorAll(`.categories-list li`).length;
   // if (categoryToggle && getItems > 0) {
   //   setSize(`${40 * getItems}px`);
@@ -33,10 +35,8 @@ export default function Navbar({ className, type }) {
         <div className="w-full h-full relative">
           <div className="w-full h-full flex justify-between items-center">
             <div className="category-and-nav flex xl:space-x-7 space-x-3 items-center">
-              
               <div className="nav">
                 <ul className="nav-wrapper flex xl:space-x-10 space-x-5">
-
                   <li className="relative">
                     <span
                       className={`flex items-center text-sm font-600 cursor-pointer ${
@@ -98,7 +98,6 @@ export default function Navbar({ className, type }) {
                                     </span>
                                   </a>
                                 </li>
-                              
                               </ul>
                             </div>
                           </div>
@@ -117,7 +116,7 @@ export default function Navbar({ className, type }) {
                       </span>
                     </Link>
                   </li>
-                 
+
                   <li>
                     <Link to="/contact">
                       <span
@@ -133,39 +132,75 @@ export default function Navbar({ className, type }) {
               </div>
             </div>
             <div className="become-seller-btn">
-              <Link to="/become-saller">
-                <div className="black-btn w-[161px] h-[40px] flex justify-center items-center cursor-pointer">
-                  <div className="flex space-x-2 items-center">
-                    <span className="text-sm font-600">Start Importing</span>
-                    <span>
-                      <svg
-                        className="fill-current"
-                        width="6"
-                        height="10"
-                        viewBox="0 0 6 10"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect
-                          x="1.08984"
-                          width="6.94106"
-                          height="1.54246"
-                          transform="rotate(45 1.08984 0)"
-                          fill="white"
-                        />
-                        <rect
-                          x="6"
-                          y="4.9082"
-                          width="6.94106"
-                          height="1.54246"
-                          transform="rotate(135 6 4.9082)"
-                          fill="white"
-                        />
-                      </svg>
-                    </span>
+              {user ? (
+                <Link to="/become-saller">
+                  <div className="black-btn w-[161px] h-[40px] flex justify-center items-center cursor-pointer">
+                    <div className="flex space-x-2 items-center">
+                      <span className="text-sm font-600">Start Importing</span>
+                      <span>
+                        <svg
+                          className="fill-current"
+                          width="6"
+                          height="10"
+                          viewBox="0 0 6 10"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            x="1.08984"
+                            width="6.94106"
+                            height="1.54246"
+                            transform="rotate(45 1.08984 0)"
+                            fill="white"
+                          />
+                          <rect
+                            x="6"
+                            y="4.9082"
+                            width="6.94106"
+                            height="1.54246"
+                            transform="rotate(135 6 4.9082)"
+                            fill="white"
+                          />
+                        </svg>
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <div className="black-btn w-[161px] h-[40px] flex justify-center items-center cursor-pointer">
+                    <div className="flex space-x-2 items-center">
+                      <span className="text-sm font-600">Start Importing</span>
+                      <span>
+                        <svg
+                          className="fill-current"
+                          width="6"
+                          height="10"
+                          viewBox="0 0 6 10"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            x="1.08984"
+                            width="6.94106"
+                            height="1.54246"
+                            transform="rotate(45 1.08984 0)"
+                            fill="white"
+                          />
+                          <rect
+                            x="6"
+                            y="4.9082"
+                            width="6.94106"
+                            height="1.54246"
+                            transform="rotate(135 6 4.9082)"
+                            fill="white"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              )}
             </div>
           </div>
         </div>
