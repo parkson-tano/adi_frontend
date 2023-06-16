@@ -5,6 +5,8 @@ import Thumbnail from "./Thumbnail";
 
 export default function Login() {
   const [checked, setValue] = useState(false);
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const rememberMe = () => {
     setValue(!checked);
   };
@@ -42,6 +44,8 @@ export default function Login() {
                       name="email"
                       type="email"
                       inputClasses="h-[50px]"
+                      value={email}
+                      inputHandler={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="input-item mb-5">
@@ -51,6 +55,8 @@ export default function Login() {
                       name="password"
                       type="password"
                       inputClasses="h-[50px]"
+                      value={password}
+                      inputHandler={(e) => setPassword(e.target.value)}
                     />
                   </div>
                   <div className="forgot-password-area flex justify-between items-center mb-7">
@@ -89,7 +95,7 @@ export default function Login() {
                       Forgot Password
                     </a>
                   </div>
-                  <div className="signin-area mb-3.5">
+                  {/* <div className="signin-area mb-3.5">
                     <div className="flex justify-center">
                       <button
                         type="button"
@@ -151,7 +157,7 @@ export default function Login() {
                         Sign In with Google
                       </span>
                     </a>
-                  </div>
+                  </div> */}
                   <div className="signup-area flex justify-center">
                     <p className="text-base text-qgraytwo font-normal">
                       Dont’t have an aceount ?

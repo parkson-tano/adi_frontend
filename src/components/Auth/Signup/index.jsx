@@ -2,12 +2,50 @@ import { useState } from "react";
 import InputCom from "../../Helpers/InputCom";
 import Layout from "../../Partials/Layout";
 import Thumbnail from "./Thumbnail";
+import axios from "axios";
+import {API_URL} from "../../../config"
+import { Password } from "tabler-icons-react";
 
 export default function Signup() {
   const [checked, setValue] = useState(false);
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
+  const [password, setPassword] = useState("")
+  const [password2, setPassword2] = useState("")
   const rememberMe = () => {
     setValue(!checked);
   };
+
+const submitForm = () => {
+  password === password2 ?
+    (axios
+      .post(`${API_URL}auth/register`, {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        phone_number: phoneNumber,
+        admin: false,
+        password: password,
+      })
+      .then((response) => {
+        alert("success");
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+         let errorMessage = "";
+         Object.entries(error.response.data).map(
+           ([key, value]) => (errorMessage += `${key}: ${value.join(")")}\n`)
+         );
+         alert(errorMessage)
+      })
+     ) : (
+    alert("password does not match")
+     )
+};
+
+
   return (
     <Layout childrenClasses="pt-0 pb-0">
       <div className="login-page-wrapper w-full py-10">
@@ -44,6 +82,8 @@ export default function Signup() {
                       name="fname"
                       type="text"
                       inputClasses="h-[50px]"
+                      value={firstName}
+                      inputHandler={(e) => setFirstName(e.target.value)}
                     />
 
                     <InputCom
@@ -52,6 +92,8 @@ export default function Signup() {
                       name="lname"
                       type="text"
                       inputClasses="h-[50px]"
+                      value={lastName}
+                      inputHandler={(e) => setLastName(e.target.value)}
                     />
                   </div>
                   <div className="flex sm:flex-row flex-col space-y-5 sm:space-y-0 sm:space-x-5 mb-5">
@@ -61,86 +103,40 @@ export default function Signup() {
                       name="email"
                       type="email"
                       inputClasses="h-[50px]"
+                      value = {email}
+                      inputHandler={(e)=> setEmail(e.target.value)}
                     />
 
                     <InputCom
-                      placeholder="0213 *********"
+                      placeholder="2376 ************"
                       label="Phone*"
                       name="phone"
                       type="text"
                       inputClasses="h-[50px]"
-                    />
-                  </div>
-
-                  <div className="input-item mb-5">
-                    <h6 className="input-label text-qgray capitalize text-[13px] font-normal block mb-2 ">
-                      Country*
-                    </h6>
-                    <div className="w-full h-[50px] border border-[#EDEDED] px-5 flex justify-between items-center mb-2">
-                      <span className="text-[13px] text-qgraytwo">
-                        Select Country
-                      </span>
-                      <span>
-                        <svg
-                          width="11"
-                          height="7"
-                          viewBox="0 0 11 7"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M5.4 6.8L0 1.4L1.4 0L5.4 4L9.4 0L10.8 1.4L5.4 6.8Z"
-                            fill="#222222"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="input-item mb-5">
-                    <InputCom
-                      placeholder="Your address Here"
-                      label="Address*"
-                      name="address"
-                      type="text"
-                      inputClasses="h-[50px]"
+                      value={phoneNumber}
+                      inputHandler={(e) => setPhoneNumber(e.target.value)}
                     />
                   </div>
                   <div className="flex sm:flex-row flex-col space-y-5 sm:space-y-0 sm:space-x-5 mb-5">
-                    <div className="w-1/2">
-                      <h6 className="input-label text-qgray capitalize text-[13px] font-normal block mb-2 ">
-                        Town / City*
-                      </h6>
-                      <div className="w-full h-[50px] border border-[#EDEDED] px-5 flex justify-between items-center mb-2">
-                        <span className="text-[13px] text-qgraytwo">
-                          Maiyami
-                        </span>
-                        <span>
-                          <svg
-                            width="11"
-                            height="7"
-                            viewBox="0 0 11 7"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M5.4 6.8L0 1.4L1.4 0L5.4 4L9.4 0L10.8 1.4L5.4 6.8Z"
-                              fill="#222222"
-                            />
-                          </svg>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="w-full h-[50px] mb-5 sm:mb-0">
-                        <InputCom
-                          label="Postcode / ZIP*"
-                          inputClasses="w-full h-full"
-                          type="text"
-                          placeholder="00000"
-                        />
-                      </div>
-                    </div>
+                    <InputCom
+                      placeholder="● ● ● ● ● ●"
+                      label="Password*"
+                      name="password"
+                      type="password"
+                      inputClasses="h-[50px]"
+                      value={password}
+                      inputHandler={(e) => setPassword(e.target.value)}
+                    />
+
+                    <InputCom
+                      placeholder="● ● ● ● ● ●"
+                      label="Confirm Password*"
+                      name="password2"
+                      type="password"
+                      inputClasses="h-[50px]"
+                      value={password2}
+                      inputHandler={(e) => setPassword2(e.target.value)}
+                    />
                   </div>
                   <div className="forgot-password-area mb-7">
                     <div className="remember-checkbox flex items-center space-x-2.5">
@@ -170,7 +166,6 @@ export default function Signup() {
                       >
                         I agree all
                         <span className="text-qblack">tarm and condition</span>
-                        in BigShop.
                       </span>
                     </div>
                   </div>
@@ -179,6 +174,7 @@ export default function Signup() {
                       <button
                         type="button"
                         className="black-btn text-sm text-white w-full h-[50px] font-semibold flex justify-center bg-purple items-center"
+                        onClick={submitForm}
                       >
                         <span>Create Account</span>
                       </button>
