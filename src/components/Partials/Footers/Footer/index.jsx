@@ -89,7 +89,7 @@ export default function Footer({type}) {
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/become-saller">
+                                            <a href="/import-product">
 
                                   <span
                                       className="text-[#9A9A9A] text-[15px] hover:text-qblack border-b border-transparent hover:border-qblack cursor-pointer capitalize">

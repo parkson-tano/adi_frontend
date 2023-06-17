@@ -57,7 +57,7 @@ export default function BecomeSaller() {
             title="Seller Application"
             breadcrumb={[
               { name: "home", path: "/" },
-              { name: "Start Importing", path: "/become-saller" },
+              { name: "Start Importing", path: "/import-product" },
             ]}
           />
         </div>
