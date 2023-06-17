@@ -22,10 +22,12 @@ import ProfileTab from "./tabs/ProfileTab";
 import ReviewTab from "./tabs/ReviewTab";
 import SupportTab from "./tabs/SupportTab";
 import WishlistTab from "./tabs/WishlistTab";
+import { useAuth } from "../../../context/auth-context";
 
 export default function Profile() {
   const [switchDashboard, setSwitchDashboard] = useState(false);
   const location = useLocation();
+  const {logout} = useAuth()
   const getHashContent = location.hash.split("#");
   const [active, setActive] = useState("dashboard");
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function Profile() {
                 <h1 className="text-[22px] font-bold text-qblack">
                   Your Dashboard
                 </h1>
-                <div className="switch-dashboard flex space-x-3 items-center">
+                {/* <div className="switch-dashboard flex space-x-3 items-center">
                   <p className="text-qgray text-base">Switch Dashboard</p>
                   <button
                     onClick={() => setSwitchDashboard(!switchDashboard)}
@@ -64,7 +66,7 @@ export default function Profile() {
                       }`}
                     ></div>
                   </button>
-                </div>
+                </div> */}
               </div>
               <div className="profile-wrapper w-full mt-8 flex space-x-10">
                 <div className="w-[236px] min-h-[600px] border-r border-[rgba(0, 0, 0, 0.1)]">
@@ -94,7 +96,7 @@ export default function Profile() {
                       </Link>
                     </div>
 
-                    <div className="item group">
+                    {/* <div className="item group">
                       <Link to="/profile#payment">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
                           <span>
@@ -105,7 +107,7 @@ export default function Profile() {
                           </span>
                         </div>
                       </Link>
-                    </div>
+                    </div> */}
                     <div className="item group">
                       <Link to="/profile#order">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
@@ -116,7 +118,7 @@ export default function Profile() {
                         </div>
                       </Link>
                     </div>
-                    <div className="item group">
+                    {/* <div className="item group">
                       <Link to="/profile#wishlist">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
                           <span>
@@ -127,7 +129,7 @@ export default function Profile() {
                           </span>
                         </div>
                       </Link>
-                    </div>
+                    </div> */}
                     <div className="item group">
                       <Link to="/profile#address">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
@@ -140,7 +142,7 @@ export default function Profile() {
                         </div>
                       </Link>
                     </div>
-                    <div className="item group">
+                    {/* <div className="item group">
                       <Link to="/profile#review">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
                           <span>
@@ -151,7 +153,7 @@ export default function Profile() {
                           </span>
                         </div>
                       </Link>
-                    </div>
+                    </div> */}
                     <div className="item group">
                       <Link to="/profile#password">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
@@ -164,7 +166,7 @@ export default function Profile() {
                         </div>
                       </Link>
                     </div>
-                    <div className="item group">
+                    {/* <div className="item group">
                       <Link to="/profile#support">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
                           <span>
@@ -175,18 +177,19 @@ export default function Profile() {
                           </span>
                         </div>
                       </Link>
-                    </div>
+                    </div> */}
                     <div className="item group">
-                      <Link to="/profile#profile">
-                        <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
+                        <button className="flex space-x-3 items-center text-qgray hover:text-qblack"
+                        onClick={logout}
+                        >
                           <span>
                             <IcoLogout />
                           </span>
+
                           <span className=" font-normal text-base">
-                            Logoout
+                            Logout
                           </span>
-                        </div>
-                      </Link>
+                        </button>
                     </div>
                   </div>
                 </div>

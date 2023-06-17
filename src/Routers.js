@@ -25,6 +25,7 @@ import TrackingOrder from "./components/TrackingOrder";
 import Wishlist from "./components/Wishlist";
 import HomeThree from "./components/HomeThree";
 import HomeFour from "./components/HomeFour";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 export default function Routers() {
   return (
@@ -45,12 +46,17 @@ export default function Routers() {
       <Route exact path="/about" element={<About />} />
       {/* <Route exact path="/blogs" element={<Blogs />} /> */}
       {/* <Route exact path="/blogs/blog" element={<Blog />} /> */}
+      <Route element={<ProtectedRoute />}>
       <Route exact path="/tracking-order" element={<TrackingOrder />} />
+      <Route exact path="/profile" element={<Profile />} />
+      </Route>
+
+
       <Route exact path="/contact" element={<Contact />} />
       <Route exact path="/faq" element={<Faq />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/signup" element={<Signup />} />
-      <Route exact path="/profile" element={<Profile />} />
+
       <Route exact path="/import-product" element={<BecomeSaller />} />
       <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route exact path="/terms-condition" element={<TermsCondition />} />

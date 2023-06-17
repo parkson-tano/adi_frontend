@@ -19,7 +19,7 @@ export default function TopBar({ className }) {
                 {user ? (
                   <>
                     <li>
-                      <Link to="/">
+                      <Link to="/profile">
                         <span className="text-xs leading-6 text-qblack font-500">
                           Account
                         </span>
