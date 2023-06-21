@@ -69,7 +69,7 @@ export default function TopBar({ className }) {
             </div>
             <div className="topbar-dropdowns sm:block hidden">
               <div className="flex space-x-6">
-                <div className="country-select flex space-x-1 items-center">
+                {/* <div className="country-select flex space-x-1 items-center">
                   <div>
                     <img
                       src={`${process.env.PUBLIC_URL}/assets/images/country-logo-16x16.png`}
@@ -86,13 +86,13 @@ export default function TopBar({ className }) {
                   <div>
                     <Arrow className="fill-current qblack" />
                   </div>
-                </div>
-                <div className="currency-select flex space-x-1 items-center">
+                </div> */}
+                {/* <div className="currency-select flex space-x-1 items-center">
                   <Selectbox className="w-fit" datas={["USD", "BDT"]} />
                   <Arrow className="fill-current qblack" />
-                </div>
+                </div> */}
                 <div className="language-select flex space-x-1 items-center">
-                  <Selectbox className="w-fit" datas={["Bangla", "english"]} />
+                  <Selectbox className="w-fit" datas={["French", "English"]} />
                   <Arrow className="fill-current qblack" />
                 </div>
               </div>
