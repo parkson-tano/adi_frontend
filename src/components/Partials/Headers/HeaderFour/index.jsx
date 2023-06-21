@@ -43,7 +43,7 @@ export default function HeaderFour({ className, drawerAction }) {
               </span>
             </a>
             <span className="w-[18px] h-[18px] text-qblack rounded-full bg-qh4-pink absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px]">
-              15
+              34
             </span>
           </div>
         </div>

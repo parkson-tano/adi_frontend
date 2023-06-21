@@ -57,7 +57,7 @@ export default function Middlebar({ className }) {
                     </span>
                   </a>
                   <span className="w-[18px] h-[18px] rounded-full bg-qh4-pink absolute -top-2.5 -right-2.5 flex justify-center items-center text-[9px] text-qblack">
-                    15
+                    78
                   </span>
                 </div>
                 {/* <div className="fixed left-0 top-0 w-full h-full z-40"></div> */}
