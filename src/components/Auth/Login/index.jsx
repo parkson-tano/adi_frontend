@@ -63,7 +63,7 @@ export default function Login() {
                 <div className="input-area">
                   <div className="input-item mb-5">
                     <InputCom
-                      placeholder="example@quomodosoft.com"
+                      placeholder="Enter Your Email"
                       label="Email Address*"
                       name="email"
                       type="email"

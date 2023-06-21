@@ -6,6 +6,7 @@ import axios from "axios";
 import {API_URL} from "../../../config"
 import { Password } from "tabler-icons-react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mantine/core";
 
 export default function Signup() {
   const navigate = useNavigate()
@@ -79,7 +80,7 @@ const submitForm = () => {
                 <div className="input-area">
                   <div className="flex sm:flex-row flex-col space-y-5 sm:space-y-0 sm:space-x-5 mb-5">
                     <InputCom
-                      placeholder="Demo Name"
+                      placeholder="First Name"
                       label="Frist Name*"
                       name="fname"
                       type="text"
@@ -89,7 +90,7 @@ const submitForm = () => {
                     />
 
                     <InputCom
-                      placeholder="Demo Name"
+                      placeholder="Last Name"
                       label="Last Name*"
                       name="lname"
                       type="text"
@@ -100,7 +101,7 @@ const submitForm = () => {
                   </div>
                   <div className="flex sm:flex-row flex-col space-y-5 sm:space-y-0 sm:space-x-5 mb-5">
                     <InputCom
-                      placeholder="Demo@gmail.com"
+                      placeholder="Email Address"
                       label="Email Address*"
                       name="email"
                       type="email"
@@ -167,19 +168,19 @@ const submitForm = () => {
                         className="text-base text-black"
                       >
                         I agree all
-                        <span className="text-qblack">tarm and condition</span>
+                        <span className="text-qblack"> term and condition</span>
                       </span>
                     </div>
                   </div>
                   <div className="signin-area mb-3">
                     <div className="flex justify-center">
-                      <button
-                        type="button"
+                      <Button
                         className="black-btn text-sm text-white w-full h-[50px] font-semibold flex justify-center bg-purple items-center"
                         onClick={submitForm}
+                        
                       >
                         <span>Create Account</span>
-                      </button>
+                      </Button>
                     </div>
                   </div>
 
