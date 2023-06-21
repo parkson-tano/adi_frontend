@@ -125,6 +125,7 @@ export default function Login() {
                         type="button"
                         className="black-btn mb-6 text-sm text-white w-full h-[50px] font-semibold flex justify-center bg-purple items-center"
                         onClick={handleSubmit}
+
                       >
                         <span>Log In</span>
                       </button>
