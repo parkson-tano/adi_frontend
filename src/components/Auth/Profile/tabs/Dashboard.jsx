@@ -26,8 +26,8 @@ export default function Dashboard() {
         .get(`${API_URL}shipping-order-fetch/?user_id=${user?.user_id}`)
         .then((res) => {
           setOrders(res.data.results);
-          const completed = res.data.results.filter((order) => order.status === "completed");
-          const pending = res.data.results.filter((order) => order.status != "completed");
+          const completed = res.data.results.filter((order) => order.order_status === "completed");
+          const pending = res.data.results.filter((order) => order.order_status != "completed");
           setCompletedOrders(completed);
           setPendingOrders(pending);
           console.log(res.data);
