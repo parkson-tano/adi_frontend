@@ -5,6 +5,7 @@ import { API_URL } from "../../../../config";
 import { useAuth } from "../../../../context/auth-context";
 import InputCom from "../../../Helpers/InputCom";
 import { Select, Button, Text } from "@mantine/core";
+import { Alert } from "@mantine/core";
 
 
 export default function ProfileTab() {
@@ -12,6 +13,7 @@ export default function ProfileTab() {
     const { user } = useAuth();
     const [profile, setProfile] = useState([]);
     const [submitted, setSubmitted] = useState(false);
+    const [successAlert, setSuccessAlert] = useState(false);
 
      const [credentials, setCredentials] = useState({
        first_name: profile?.first_name,
@@ -45,6 +47,7 @@ export default function ProfileTab() {
           const res = axios.patch(`${API_URL}auth/user/${user?.user_id}`, credentials);
           console.log(res);
           setSubmitted(false);
+          setSuccessAlert(true);
         } catch (err) {
           console.log(err);
           setSubmitted(false);
@@ -54,6 +57,16 @@ export default function ProfileTab() {
     <>
       <div className="flex space-x-8">
         <div className="w-[570px] ">
+          {successAlert && (
+            <Alert
+              title="Profile Updated!"
+              color="green"
+              radius="lg"
+              variant="filled"
+            >
+              Email or Password is Incorrect
+            </Alert>
+          )}
           <div className="input-item flex space-x-2.5 mb-8">
             <div className="w-1/2 h-full">
               <InputCom
@@ -152,7 +165,6 @@ export default function ProfileTab() {
           className="w-[164px] h-[50px] bg-qblack text-white text-sm"
           onClick={handleSubmit}
           loading={submitted}
-          
         >
           Update Profile
         </Button>

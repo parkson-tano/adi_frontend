@@ -181,7 +181,7 @@ export default function Footer() {
                 rel="noreferrer"
                 className="font-500 text-qh4-pink mx-1"
               >
-                Parkson Tano
+                Parkson Tanosw
               </a>
               All rights reserved
             </span>

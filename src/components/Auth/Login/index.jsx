@@ -2,8 +2,10 @@ import { useState } from "react";
 import InputCom from "../../Helpers/InputCom";
 import Layout from "../../Partials/Layout";
 import Thumbnail from "./Thumbnail";
+import { Alert } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/auth-context";
+import { Button } from "@mantine/core";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submit, setSubmit] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
   const [error, setError] = useState("");
   const rememberMe = () => {
     setValue(!checked);
@@ -19,6 +22,8 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmit(true);
+    setErrorAlert(false);
     try {
       const userData = {
         email: email,
@@ -30,7 +35,9 @@ export default function Login() {
       setError(null);
     } catch (err) {
       console.log("aad", err);
-      setError(err.message); // set the error message in the state
+      setError(err.message); 
+      setErrorAlert(true);
+      // set the error message in the state
       setSubmit(false);
     }
   };
@@ -45,6 +52,17 @@ export default function Login() {
                   <h1 className="text-[34px] font-bold leading-[74px] text-qblack">
                     Log In
                   </h1>
+                  {errorAlert && (
+                    <Alert
+                      title="Login Error!"
+                      color="red"
+                      radius="lg"
+                      variant="filled"
+                    >
+                      Email or Password is Incorrect
+                    </Alert>
+                  )}
+
                   <div className="shape -mt-6">
                     <svg
                       width="172"
@@ -112,23 +130,23 @@ export default function Login() {
                         Remember Me
                       </span>
                     </div>
-                    <a
+                    {/* <a
                       href="/forgot-password"
                       className="text-base text-qyellow"
                     >
                       Forgot Password
-                    </a>
+                    </a> */}
                   </div>
                   <div className="signin-area mb-3.5">
                     <div className="flex justify-center">
-                      <button
+                      <Button
                         type="button"
                         className="black-btn mb-6 text-sm text-white w-full h-[50px] font-semibold flex justify-center bg-purple items-center"
                         onClick={handleSubmit}
-
+                        loading={submit}
                       >
                         <span>Log In</span>
-                      </button>
+                      </Button>
                     </div>
                     {/* <a
                       href="#"

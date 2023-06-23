@@ -37,7 +37,7 @@ export default function Dashboard() {
     <>
       <div className="welcome-msg w-full">
         <div>
-          <p className="text-qblack text-lg">Hello, Shovo</p>
+          <p className="text-qblack text-lg">Hello, {user?.first_name} </p>
           <h1 className="font-bold text-[24px] text-qblack">
             Welcome to your Profile
           </h1>

@@ -3,51 +3,73 @@ import InputCom from "../../Helpers/InputCom";
 import Layout from "../../Partials/Layout";
 import Thumbnail from "./Thumbnail";
 import axios from "axios";
-import {API_URL} from "../../../config"
+import { API_URL } from "../../../config";
 import { Password } from "tabler-icons-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mantine/core";
+import { Alert } from "@mantine/core";
 
 export default function Signup() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [checked, setValue] = useState(false);
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [email, setEmail] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState("")
-  const [password, setPassword] = useState("")
-  const [password2, setPassword2] = useState("")
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [errorAlert, setErrorAlert] = useState(false);
+  const [error, setError] = useState("");
+  const [submit, setSubmit] = useState(false);
+  const [passwordAlert, setPasswordAlert] = useState(false);
   const rememberMe = () => {
     setValue(!checked);
   };
 
-const submitForm = () => {
-  password === password2 ?
-    (axios
-      .post(`${API_URL}auth/register`, {
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        phone_number: phoneNumber,
-        admin: false,
-        password: password,
-      })
-      .then((response) => {
-        alert("success");
-      })
-      .catch((error) => {
-        console.log(error.response.data)
-         let errorMessage = "";
-         Object.entries(error.response.data).map(
-           ([key, value]) => (errorMessage += `${key}: ${value.join(")")}\n`)
-         );
-         alert(errorMessage)
-      })
-     ) : (
-    alert("password does not match")
-     )
-};
+  const submitForm = () => {
+    setSubmit(true);
+    setErrorAlert(false);
+    setPasswordAlert(false);
 
+    if (password === password2) {
+      axios
+        .post(`${API_URL}auth/register`, {
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          phone_number: phoneNumber,
+          admin: false,
+          password: password,
+          country: 'Cameroon', // 'Cameroon
+          town: "",
+          quater: "",
+          address: "",
+        })
+        .then((response) => {
+          console.log(response.data);
+          setSubmit(false);
+          navigate("/login");
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          setSubmit(false);
+          let errorMessage = "";
+          Object.entries(error.response.data).map(([key, value]) => {
+            if (Array.isArray(value)) {
+              errorMessage += `${key}: ${value.join(")")} \n`;
+            } else {
+              errorMessage += `${key}: ${value} \n`;
+            }
+          });
+          setErrorAlert(true);
+          setError(errorMessage);
+        });
+    } else {
+      setErrorAlert(true);
+      setError("Passwords do not match");
+      setSubmit(false);
+    }
+  };
 
   return (
     <Layout childrenClasses="pt-0 pb-0">
@@ -77,6 +99,17 @@ const submitForm = () => {
                     </svg>
                   </div>
                 </div>
+                {errorAlert && (
+                  <Alert
+                    title="Signup Error!"
+                    color="red"
+                    radius="lg"
+                    variant="filled"
+                  >
+                    {error}
+                  </Alert>
+                )}
+
                 <div className="input-area">
                   <div className="flex sm:flex-row flex-col space-y-5 sm:space-y-0 sm:space-x-5 mb-5">
                     <InputCom
@@ -163,13 +196,13 @@ const submitForm = () => {
                           </svg>
                         )}
                       </button>
-                      <span
+                      {/* <span
                         onClick={rememberMe}
                         className="text-base text-black"
                       >
                         I agree all
                         <span className="text-qblack"> term and condition</span>
-                      </span>
+                      </span> */}
                     </div>
                   </div>
                   <div className="signin-area mb-3">
@@ -177,7 +210,7 @@ const submitForm = () => {
                       <Button
                         className="black-btn text-sm text-white w-full h-[50px] font-semibold flex justify-center bg-purple items-center"
                         onClick={submitForm}
-                        
+                        loading={submit}
                       >
                         <span>Create Account</span>
                       </Button>
