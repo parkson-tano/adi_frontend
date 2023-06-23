@@ -95,6 +95,7 @@ export default function BecomeSaller() {
         vendor_site: credentials.vendor_website,
         sending_date: null,
         mode: "",
+        total_amount: "",
         order_date: credentials.order_date,
         expected_delivery_date: credentials.expected_delivery_date,
         expected_delivery_date_cmr: null,
