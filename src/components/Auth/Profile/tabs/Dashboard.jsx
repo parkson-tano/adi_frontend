@@ -1,6 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../../../../config";
+import { useAuth } from "../../../../context/auth-context";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [profile, setProfile] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [completedOrders, setCompletedOrders] = useState([]);
+  const [pendingOrders, setPendingOrders] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${API_URL}auth/user/${user?.user_id}`).then((res) => {
+      setProfile(res.data);
+      console.log(res.data);
+    });
+  }, []);
+
+    useEffect(() => {
+      axios
+        .get(`${API_URL}shipping-order-fetch/?user_id=${user?.user_id}`)
+        .then((res) => {
+          setOrders(res.data.results);
+          const completed = res.data.results.filter((order) => order.status === "completed");
+          const pending = res.data.results.filter((order) => order.status != "completed");
+          setCompletedOrders(completed);
+          setPendingOrders(pending);
+          console.log(res.data);
+        });
+    }, []);
   return (
     <>
       <div className="welcome-msg w-full">
@@ -41,7 +71,7 @@ export default function Dashboard() {
             New Orders
           </p>
           <span className="text-[40px] text-white group-hover:text-qblacktext font-bold leading-none mt-1 block">
-            656
+            {orders?.length}
           </span>
         </div>
         <div className="qv-item w-[252px] h-[208px] bg-qblack group hover:bg-qyellow transition-all duration-300 ease-in-out p-6">
@@ -62,10 +92,10 @@ export default function Dashboard() {
             </span>
           </div>
           <p className="text-xl text-white group-hover:text-qblacktext mt-5">
-            New Orders
+            Completed Orders
           </p>
           <span className="text-[40px] text-white group-hover:text-qblacktext font-bold leading-none mt-1 block">
-            656
+            {completedOrders?.length}
           </span>
         </div>
         <div className="qv-item w-[252px] h-[208px] bg-qblack group hover:bg-qyellow transition-all duration-300 ease-in-out p-6">
@@ -94,103 +124,78 @@ export default function Dashboard() {
             </span>
           </div>
           <p className="text-xl text-white group-hover:text-qblacktext mt-5">
-            New Orders
+            Pending Orders
           </p>
           <span className="text-[40px] text-white group-hover:text-qblacktext font-bold leading-none mt-1 block">
-            656
+            {pendingOrders?.length}
           </span>
         </div>
       </div>
       <div className="dashboard-info mt-8 flex justify-between items-center bg-primarygray px-7 py-7">
         <div className="">
           <p className="title text-[22px] font-semibold">
-            Parsonal Information
+            Personal Information
           </p>
           <div className="mt-5">
             <table>
               <tr className="inline-flex mb-5">
                 <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>Name:</div>
+                  <div>First Name:</div>
                 </td>
                 <td className="text-base text-qblack font-medium">
-                  Shuvo khan
+                  {profile?.first_name} {profile?.last_name}
                 </td>
               </tr>
+
               <tr className="inline-flex mb-5">
                 <td className="text-base text-qgraytwo w-[100px] block">
                   <div>Email:</div>
                 </td>
                 <td className="text-base text-qblack font-medium">
-                  rafiqulislamsuvobd@gmail.com
+                  {profile?.email}
                 </td>
               </tr>
+              <tr></tr>
               <tr className="inline-flex mb-5">
                 <td className="text-base text-qgraytwo w-[100px] block">
                   <div>Phone:</div>
                 </td>
                 <td className="text-base text-qblack font-medium">
-                  01792166627
+                  {profile?.phone_number}
                 </td>
-              </tr>
-              <tr className="inline-flex mb-5">
-                <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>City:</div>
-                </td>
-                <td className="text-base text-qblack font-medium">
-                  Dhaka,Bangladesh
-                </td>
-              </tr>
-              <tr className="inline-flex mb-5">
-                <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>Zip:</div>
-                </td>
-                <td className="text-base text-qblack font-medium">4040</td>
               </tr>
             </table>
           </div>
         </div>
         <div className="w-[1px] h-[164px] bg-[#E4E4E4]"></div>
         <div className="ml-6">
-          <p className="title text-[22px] font-semibold">Shop Info</p>
+          <p className="title text-[22px] font-semibold">Personal Info</p>
           <div className="mt-5">
             <table>
               <tr className="inline-flex mb-5">
                 <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>Name:</div>
+                  <div>Country:</div>
                 </td>
                 <td className="text-base text-qblack font-medium">
-                  Shuvo khan
+                  {profile?.country}
+                </td>
+              </tr>
+              <tr></tr>
+              <tr className="inline-flex mb-5">
+                <td className="text-base text-qgraytwo w-[100px] block">
+                  <div>Town:</div>
+                </td>
+                <td className="text-base text-qblack font-medium">
+                  {profile?.town}
                 </td>
               </tr>
               <tr className="inline-flex mb-5">
                 <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>Email:</div>
+                  <div>Address:</div>
                 </td>
                 <td className="text-base text-qblack font-medium">
-                  rafiqulislamsuvobd@gmail.com
+                  {profile?.address}
                 </td>
-              </tr>
-              <tr className="inline-flex mb-5">
-                <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>Phone:</div>
-                </td>
-                <td className="text-base text-qblack font-medium">
-                  01792166627
-                </td>
-              </tr>
-              <tr className="inline-flex mb-5">
-                <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>City:</div>
-                </td>
-                <td className="text-base text-qblack font-medium">
-                  Dhaka,Bangladesh
-                </td>
-              </tr>
-              <tr className="inline-flex mb-5">
-                <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>Zip:</div>
-                </td>
-                <td className="text-base text-qblack font-medium">4040</td>
               </tr>
             </table>
           </div>

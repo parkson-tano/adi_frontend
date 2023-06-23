@@ -179,14 +179,14 @@ export default function FooterFour() {
               </a>
             </div>
             <span className="sm:text-base text-[10px] text-white font-300">
-              ©2022
+              ©2023 by{" "}
               <a
-                href="https://quomodosoft.com/"
+                href="https://parksontano.com/"
                 target="_blank"
                 rel="noreferrer"
                 className="font-500 text-qh4-pink mx-1"
               >
-                Quomodosoft
+                Parkson Tano
               </a>
               All rights reserved
             </span>
