@@ -142,7 +142,7 @@ export default function Dashboard() {
             <table>
               <tr className="inline-flex mb-5">
                 <td className="text-base text-qgraytwo w-[100px] block">
-                  <div>First Name:</div>
+                  <div>Full Name:</div>
                 </td>
                 <td className="text-base text-qblack font-medium">
                   {profile?.first_name} {profile?.last_name}
