@@ -12,6 +12,8 @@ export default function Dashboard() {
   const [completedOrders, setCompletedOrders] = useState([]);
   const [pendingOrders, setPendingOrders] = useState([]);
 
+  
+
   useEffect(() => {
     axios.get(`${API_URL}auth/user/${user?.user_id}`).then((res) => {
       setProfile(res.data);

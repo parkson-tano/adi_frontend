@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import InputCom from "../Helpers/InputCom";
 import PageTitle from "../Helpers/PageTitle";
 import Layout from "../Partials/Layout";
@@ -29,6 +29,7 @@ const PRODUCT_CATEGORY = [
 export default function BecomeSaller() {
   const navigate = useNavigate();
   const [category, setCategory] = useState("");
+  const [orderType, setOrderType] = useState("");
   const [opened, { open, close }] = useDisclosure(true);
   const [submitted, setSubmitted] = useState(false);
   const { user } = useAuth();
@@ -52,7 +53,16 @@ export default function BecomeSaller() {
     estimated_weight: "",
     reference_number: "",
   });
+  const [orders, setOrders] = useState([]);
 
+  useEffect(() => {
+    axios
+      .get(`${API_URL}shipping-order`)
+      .then((res) => {
+        setOrders(res.data.results);
+        console.log(res.data);
+      });
+  }, []);
   const handleChange = (prop) => (event) => {
     setCredentials({
       ...credentials,
@@ -60,47 +70,46 @@ export default function BecomeSaller() {
     });
   };
 
+  const orderID = `ADIETC-000${orders?.length + 1}-Q2023`;
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setSubmitted(true);
-  try {
-    const res = await axios.post(`${API_URL}shipping-order/`, {
-      first_name: credentials.first_name,
-      last_name: credentials.last_name,
-      phone_number: credentials.phone,
-      address: credentials.address,
-      region: credentials.region,
-      town: credentials.town,
-      quater: credentials.address2,
-      order_id: "",
-      order_status: "peding",
-      order_type: "",
-      product_description: credentials.goods_description,
-      product_weight: credentials.estimated_weight,
-      product_price: credentials.estimated_amount_paid,
-      product_type: category,
-      vendor_name: credentials.vendor_name,
-      vendor_site: credentials.vendor_website,
-      sending_date: null,
-      mode: "",
-      order_date: credentials.order_date,
-      expected_delivery_date: credentials.expected_delivery_date,
-      expected_delivery_date_cmr: null,
-      user: user?.user_id,
-    });
-    console.log(res);
-    setSubmitted(false);
-    navigate("/profile#order");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    try {
+      const res = await axios.post(`${API_URL}shipping-order/`, {
+        first_name: credentials.first_name,
+        last_name: credentials.last_name,
+        phone_number: credentials.phone,
+        address: credentials.address,
+        region: credentials.region,
+        town: credentials.town,
+        quater: credentials.address2,
+        order_id: orderID,
+        order_status: "pending",
+        order_type: orderType,
+        product_description: credentials.goods_description,
+        product_weight: credentials.estimated_weight,
+        product_price: credentials.estimated_amount_paid,
+        product_type: category,
+        vendor_name: credentials.vendor_name,
+        vendor_site: credentials.vendor_website,
+        sending_date: null,
+        mode: "",
+        order_date: credentials.order_date,
+        expected_delivery_date: credentials.expected_delivery_date,
+        expected_delivery_date_cmr: null,
+        user: user?.user_id,
+      });
+      console.log(res);
+      setSubmitted(false);
+      navigate("/profile#order");
 
-    open();
-  } catch (err) {
-    console.log(err);
-    setSubmitted(false);
-  }
-};
-
-
+      open();
+    } catch (err) {
+      console.log(err);
+      setSubmitted(false);
+    }
+  };
 
   return (
     <Layout childrenClasses="pt-0 pb-0">
@@ -305,6 +314,19 @@ const handleSubmit = async (e) => {
                         inputClasses="h-[50px]"
                         value={credentials.vendor_website}
                         inputHandler={handleChange("vendor_website")}
+                      />
+                    </div>
+                    <div className="mb-5">
+                      <Select
+                        label="Order Type*"
+                        placeholder="Select Order Type"
+                        className="input-field placeholder:text-sm text-sm px-0 text-dark-gray w-full h-full font-normal bg-white focus:ring-0 focus:outline-none"
+                        data={[
+                          { value: "Import", label: "Import" },
+                          { value: "Export", label: "Export" },
+                        ]}
+                        value={orderType}
+                        onChange={setOrderType}
                       />
                     </div>
                     <div className="mb-5">

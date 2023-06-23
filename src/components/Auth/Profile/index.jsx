@@ -130,7 +130,7 @@ export default function Profile() {
                         </div>
                       </Link>
                     </div> */}
-                    <div className="item group">
+                    {/* <div className="item group">
                       <Link to="/profile#address">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
                           <span>
@@ -141,7 +141,7 @@ export default function Profile() {
                           </span>
                         </div>
                       </Link>
-                    </div>
+                    </div> */}
                     {/* <div className="item group">
                       <Link to="/profile#review">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
@@ -154,7 +154,7 @@ export default function Profile() {
                         </div>
                       </Link>
                     </div> */}
-                    <div className="item group">
+                    {/* <div className="item group">
                       <Link to="/profile#password">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">
                           <span>
@@ -165,7 +165,7 @@ export default function Profile() {
                           </span>
                         </div>
                       </Link>
-                    </div>
+                    </div> */}
                     {/* <div className="item group">
                       <Link to="/profile#support">
                         <div className="flex space-x-3 items-center text-qgray hover:text-qblack">

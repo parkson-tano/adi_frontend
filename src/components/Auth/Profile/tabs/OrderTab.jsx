@@ -3,20 +3,21 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../../../config";
 import { useAuth } from "../../../../context/auth-context";
+import dayjs from "dayjs";
 
 export default function OrderTab() {
-    const navigate = useNavigate();
-    const { user } = useAuth();
-    const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [orders, setOrders] = useState([]);
 
-        useEffect(() => {
-          axios
-            .get(`${API_URL}shipping-order-fetch/?user_id=${user?.user_id}`)
-            .then((res) => {
-              setOrders(res.data.results);
-              console.log(res.data);
-            });
-        }, []);
+  useEffect(() => {
+    axios
+      .get(`${API_URL}shipping-order-fetch/?user_id=${user?.user_id}`)
+      .then((res) => {
+        setOrders(res.data.results);
+        console.log(res.data);
+      });
+  }, []);
 
   return (
     <>
@@ -39,21 +40,23 @@ export default function OrderTab() {
               {orders?.map((order) => (
                 <tr className="bg-white border-b hover:bg-gray-50">
                   <td className="text-center py-4">
-                    <span className="text-lg text-qgray font-medium">#{order.id}</span>
+                    <span className="text-lg text-qgray font-medium">
+                      #{order.order_id}
+                    </span>
                   </td>
                   <td className="text-center py-4 px-2">
                     <span className="text-base text-qgray  whitespace-nowrap">
-                      {order.date_created}
+                      {dayjs(order.date_created).format("DD-MMMM-YYYY")}
                     </span>
                   </td>
                   <td className="text-center py-4 px-2">
                     <span className="text-sm rounded text-green-500 bg-green-100 p-2">
-                      {order.status}
+                      {order.order_status.toUpperCase()}
                     </span>
                   </td>
                   <td className="text-center py-4 px-2">
                     <span className="text-base text-qblack whitespace-nowrap px-2 ">
-                      $757
+                      {order.total_amount}
                     </span>
                   </td>
                   <td className="text-center py-4">

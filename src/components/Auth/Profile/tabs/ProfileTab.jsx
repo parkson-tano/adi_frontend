@@ -24,8 +24,8 @@ export default function ProfileTab() {
        address: profile?.address,
      });
 
-    useEffect(async () => {
-      await axios.get(`${API_URL}auth/user/${user?.user_id}`).then((res) => {
+    useEffect( () => {
+      axios.get(`${API_URL}auth/user/${user?.user_id}`).then((res) => {
         setProfile(res.data);
         console.log(res.data);
       });
@@ -38,11 +38,11 @@ export default function ProfileTab() {
         });
       };
 
-      const handleSubmit = async (e) => {
+      const handleSubmit =  (e) => {
         e.preventDefault();
         setSubmitted(true);
         try {
-          const res = await axios.patch(`${API_URL}auth/user/${user?.user_id}`, credentials);
+          const res = axios.patch(`${API_URL}auth/user/${user?.user_id}`, credentials);
           console.log(res);
           setSubmitted(false);
         } catch (err) {
